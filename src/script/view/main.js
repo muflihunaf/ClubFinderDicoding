@@ -1,11 +1,14 @@
+import DataSource from '../data/data-source.js';
 const main = () => {
     const searchElement = document.querySelector("#searchElement");
     const buttonSearchElement = document.querySelector("#searchButtonElement");
     const clubListElement = document.querySelector("#clubList");
 
     const onButtonSearchClicked = () => {
-        const dataSource = new DataSource(renderResult, fallbackResult);
-        dataSource.searchClub(searchElement.value);
+        DataSource.searchClub(searchElement.value)
+        .then(renderResult)
+        .catch(fallbackResult);
+
     };
 
     const renderResult = results => {
@@ -26,10 +29,11 @@ const main = () => {
         })
     };
 
-    const fallbackResult =  message => {
+    const fallbackResult = message => {
         clubListElement.innerHTML = "";
-        clubListElement.innerHTML += <h2 class="placeholder">${message} </h2>
+        clubListElement.innerHTML += `<h2 class="placeholder">${message} </h2>`
     };
 
     buttonSearchElement.addEventListener("click", onButtonSearchClicked);
 };
+export default main;

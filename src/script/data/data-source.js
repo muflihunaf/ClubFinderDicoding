@@ -6,7 +6,7 @@ class DataSource {
             if (filteredClubs.length) {
                 resolve(filteredClubs);
             } else {
-                reject('${keyword} is not found');
+                reject(`${keyword} is not found`);
             }
         });
         }
